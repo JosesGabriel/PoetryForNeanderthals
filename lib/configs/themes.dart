@@ -8,6 +8,7 @@ ThemeData _buildDefaultTheme() {
     fontFamily: FontFamily.nunito,
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(seedColor: kPink),
+    brightness: Brightness.light,
   );
 }
 

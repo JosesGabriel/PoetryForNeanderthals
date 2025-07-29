@@ -1,4 +1,5 @@
-import 'package:flirt/gen/assets.gen.dart';
+import 'package:flirt/core/module/home/interfaces/widgets/card_container.dart';
+import 'package:flirt/core/module/home/interfaces/widgets/prompt_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,28 +7,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return const Scaffold(
+      backgroundColor: Color(0xFFF9F5EC),
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Expanded(child: PromptCard()),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              flex: 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Assets.images.nuxifyLogo.image(width: width * 0.3),
+                  CardContainer(color: Color(0xFF95E1D3), title: '+3'),
+                  CardContainer(color: Color(0xFFFCE38A), title: '+1'),
+                  CardContainer(color: Color(0xFFF38181), title: '-1'),
                 ],
-              ),
-            ),
-            Container(
-              width: width,
-              padding: const EdgeInsets.all(20),
-              child: const Text(
-                'v1.4.0',
-                style: TextStyle(fontSize: 11, color: Colors.white54),
-                textAlign: TextAlign.center,
               ),
             ),
           ],
