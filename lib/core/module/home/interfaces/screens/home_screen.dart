@@ -7,13 +7,24 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFFF9F5EC),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF9F5EC),
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Expanded(child: PromptCard()),
             Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const PromptCard(),
+                  IconButton.filled(
+                    onPressed: () {},
+                    icon: const Icon(Icons.undo_rounded),
+                  )
+                ],
+              ),
+            ),
+            const Expanded(
               flex: 2,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

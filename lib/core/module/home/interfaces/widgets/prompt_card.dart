@@ -13,7 +13,7 @@ class PromptCard extends StatelessWidget {
         child: Card(
           elevation: 6,
           shadowColor: Colors.black26,
-          color: const Color(0xFFDCCFC0),
+          color: const Color(0xFFE9E3DF),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
