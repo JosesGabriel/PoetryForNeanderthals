@@ -1,7 +1,9 @@
+import 'package:flirt/core/module/home/application/service/cubit/home_dto.dart';
 import 'package:flutter/material.dart';
 
 class PromptCard extends StatelessWidget {
-  const PromptCard({super.key});
+  const PromptCard({required this.data, super.key});
+  final Prompt data;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class PromptCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Tooth',
+                  data.one,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Colors.black87,
@@ -53,7 +55,7 @@ class PromptCard extends StatelessWidget {
                 const Divider(thickness: 1),
                 const SizedBox(height: 16),
                 Text(
-                  'Tooth Fairy',
+                  data.three,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Colors.black87,
