@@ -57,6 +57,9 @@ flutter:
         - asset: assets/fonts/Nunito/Nunito-LightItalic.ttf
           weight: 300
           style: italic
+    - family: LuckiestGuy
+      fonts:
+        - asset: assets/fonts/LuckiestGuy/LuckiestGuy-Regular.ttf
 
 flutter_launcher_icons:
   android: true

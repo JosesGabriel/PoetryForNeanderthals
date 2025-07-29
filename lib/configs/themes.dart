@@ -5,7 +5,7 @@ final ThemeData defaultTheme = _buildDefaultTheme();
 const Color kPink = Color(0xFFE21E6A);
 ThemeData _buildDefaultTheme() {
   return ThemeData(
-    fontFamily: FontFamily.nunito,
+    fontFamily: FontFamily.luckiestGuy,
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(seedColor: kPink),
     brightness: Brightness.light,
