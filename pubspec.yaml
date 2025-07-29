@@ -1,0 +1,76 @@
+name: flirt
+description: "A new Flutter project."
+publish_to: "none"
+version: 1.4.0
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_dotenv: ^5.2.1
+  flutter_secure_storage: ^9.2.4
+  http: ^1.4.0
+  intl: ^0.20.2
+  json_annotation: ^4.9.0
+  # Core UI widgets
+  # nuxify_widgetbook_core:
+  #     git:
+  #       url: https://github.com/Nuxify/widgetbook.git
+  #       path: core
+  #       ref: v1.7.2
+  # Mobile Scanner widget
+  # nuxify_widgetbook_qr_scanner:
+  #     git:
+  #       url: https://github.com/Nuxify/widgetbook.git
+  #       path: qr_scanner
+  #       ref: v1.7.2
+
+dev_dependencies:
+  bloc_test: ^10.0.0
+  build_runner: ^2.4.15
+  flutter_gen_runner: ^5.10.0
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.6
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.9.5
+  lint: ^2.8.0
+  mocktail: ^1.0.4
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
+    - assets/images/
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito/Nunito-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Nunito/Nunito-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Nunito/Nunito-LightItalic.ttf
+          weight: 300
+          style: italic
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app-launcher-icon.png"
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#000000"
+  image: assets/images/logo.png
+
+  web: false
+
+  android_12:
+    color: "#000000"
+    icon_background_color: "#000000"
+    image: assets/images/logo-android12.png
