@@ -1,28 +1,21 @@
 part of 'home_cubit.dart';
 
 class HomeState {
-  HomeState({
-    required this.data,
-  });
-
-  final QuoteStateDTO data;
+  HomeState();
 }
 
-class FetchQuoteLoading extends HomeState {
-  FetchQuoteLoading({required super.data});
-}
+class FetchQuoteLoading extends HomeState {}
 
 class FetchQuoteSuccess extends HomeState {
-  FetchQuoteSuccess(this.quoteResponse, {required super.data});
+  FetchQuoteSuccess(this.color);
 
-  final QuoteResponseDTO quoteResponse;
+  final String color;
 }
 
 class FetchQuoteFailed extends HomeState {
   FetchQuoteFailed({
     required this.errorCode,
     required this.message,
-    required super.data,
   });
 
   final String errorCode;

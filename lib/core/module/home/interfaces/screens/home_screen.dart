@@ -1,4 +1,3 @@
-import 'package:flirt/core/module/home/interfaces/widgets/quotes_card.dart';
 import 'package:flirt/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +18,6 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Assets.images.nuxifyLogo.image(width: width * 0.3),
-                  const QuotesCard(),
                 ],
               ),
             ),
