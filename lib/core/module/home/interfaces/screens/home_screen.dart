@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flirt/core/module/home/application/service/cubit/home_cubit.dart';
 import 'package:flirt/core/module/home/application/service/cubit/home_dto.dart';
 import 'package:flirt/core/module/home/interfaces/widgets/card_container.dart';
@@ -19,10 +21,37 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Animation<double> _bounceAnimation;
   late Animation<double> _wiggleAnimation;
 
+  late int _timeLeft;
+  int secondsDuration = 75;
+  Timer? _timer;
+
+  void _startTimer() {
+    _timer?.cancel();
+    setState(() => _timeLeft = secondsDuration);
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      if (_timeLeft <= 0) {
+        timer.cancel();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Time's up!")),
+        );
+      } else {
+        setState(() => _timeLeft--);
+      }
+    });
+  }
+
+  Color _getTimerColor() {
+    if (_timeLeft > secondsDuration * 0.5) return Colors.green;
+    if (_timeLeft > secondsDuration * 0.2) return Colors.orange;
+    return Colors.red;
+  }
+
   @override
   void initState() {
     super.initState();
     context.read<HomeCubit>().fetchPrompt();
+    _timeLeft = 75;
 
     // Setup animations
     _bounceController = AnimationController(
@@ -59,6 +88,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void dispose() {
     _bounceController.dispose();
     _wiggleController.dispose();
+    _timer?.cancel();
+
     super.dispose();
   }
 
@@ -206,6 +237,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                   onPressed: () {
                     context.read<HomeCubit>().newGame();
+                    _startTimer();
                   },
                   label: const Text(
                     'New Game',
@@ -220,21 +252,56 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               // Prompt card section with cave painting frame
               Expanded(
                 flex: 2,
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  child: BlocBuilder<HomeCubit, HomeState>(
-                    buildWhen: (HomeState previous, HomeState current) =>
-                        current is FetchPromptSuccess,
-                    builder: (BuildContext context, HomeState state) {
-                      if (state is FetchPromptSuccess) {
-                        currentPrompt = state.data;
-                        return _buildCaveFrame(PromptCard(data: state.data));
-                      }
-                      return _buildCaveFrame(
-                        PromptCard(data: Prompt(one: '', three: '')),
-                      );
-                    },
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Center(
+                      child: GestureDetector(
+                        onTap: _startTimer,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 200,
+                              height: 200,
+                              child: CircularProgressIndicator(
+                                value: _timeLeft / secondsDuration,
+                                strokeWidth: 15,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    _getTimerColor()),
+                                backgroundColor: Colors.grey.shade800,
+                              ),
+                            ),
+                            Text(
+                              '$_timeLeft',
+                              style: TextStyle(
+                                fontSize: 60,
+                                fontWeight: FontWeight.bold,
+                                color: _getTimerColor(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: BlocBuilder<HomeCubit, HomeState>(
+                        buildWhen: (HomeState previous, HomeState current) =>
+                            current is FetchPromptSuccess,
+                        builder: (BuildContext context, HomeState state) {
+                          if (state is FetchPromptSuccess) {
+                            currentPrompt = state.data;
+                            return _buildCaveFrame(
+                                PromptCard(data: state.data));
+                          }
+                          return _buildCaveFrame(
+                            PromptCard(data: Prompt(one: '', three: '')),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
 

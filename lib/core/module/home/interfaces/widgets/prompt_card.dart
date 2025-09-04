@@ -124,59 +124,61 @@ class _PromptCardState extends State<PromptCard> with TickerProviderStateMixin {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             // Top scoring badge
-                            _buildScoringBadge('+1', const Color(0xFFFF9800)),
-
-                            const SizedBox(height: 20),
-
                             // Simple word section
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 12,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF8B4513)
-                                    .withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(
-                                  color: const Color(0xFF8B4513)
-                                      .withValues(alpha: 0.3),
-                                  width: 2,
-                                ),
-                              ),
-                              child: Column(
-                                children: <Widget>[
-                                  const Text(
-                                    'SIMPLE WORD:',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFF8B4513),
-                                      letterSpacing: 1,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: const EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 12,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF8B4513)
+                                        .withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: const Color(0xFF8B4513)
+                                          .withValues(alpha: 0.3),
+                                      width: 2,
                                     ),
                                   ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    widget.data.one.toUpperCase(),
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w900,
-                                      color: Color(0xFF2D1810),
-                                      shadows: <Shadow>[
-                                        Shadow(
-                                          color: Colors.white54,
-                                          offset: Offset(1, 1),
-                                          blurRadius: 2,
+                                  child: Column(
+                                    children: <Widget>[
+                                      const Text(
+                                        'SIMPLE WORD:',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xFF8B4513),
+                                          letterSpacing: 1,
                                         ),
-                                      ],
-                                    ),
-                                    textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        widget.data.one.toUpperCase(),
+                                        style: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w900,
+                                          color: Color(0xFF2D1810),
+                                          shadows: <Shadow>[
+                                            Shadow(
+                                              color: Colors.white54,
+                                              offset: Offset(1, 1),
+                                              blurRadius: 2,
+                                            ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                _buildScoringBadge(
+                                    '+1', const Color(0xFFFF9800)),
+                              ],
                             ),
-
-                            // const SizedBox(height: 16),
 
                             // Cave painting divider
                             Row(
@@ -217,60 +219,61 @@ class _PromptCardState extends State<PromptCard> with TickerProviderStateMixin {
                               ],
                             ),
 
-                            // const SizedBox(height: 16),
-
                             // Complex word section
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 12,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF4CAF50)
-                                    .withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(
-                                  color: const Color(0xFF4CAF50)
-                                      .withValues(alpha: 0.3),
-                                  width: 2,
-                                ),
-                              ),
-                              child: Column(
-                                children: <Widget>[
-                                  const Text(
-                                    'HARD WORD:',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFF2E7D32),
-                                      letterSpacing: 1,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: const EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 12,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF4CAF50)
+                                        .withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: const Color(0xFF4CAF50)
+                                          .withValues(alpha: 0.3),
+                                      width: 2,
                                     ),
                                   ),
-                                  // const SizedBox(height: 6),
-                                  Text(
-                                    widget.data.three.toUpperCase(),
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w900,
-                                      color: Color(0xFF2D1810),
-                                      shadows: <Shadow>[
-                                        Shadow(
-                                          color: Colors.white54,
-                                          offset: Offset(1, 1),
-                                          blurRadius: 2,
+                                  child: Column(
+                                    children: <Widget>[
+                                      const Text(
+                                        'HARD WORD:',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xFF2E7D32),
+                                          letterSpacing: 1,
                                         ),
-                                      ],
-                                    ),
-                                    textAlign: TextAlign.center,
+                                      ),
+                                      // const SizedBox(height: 6),
+                                      Text(
+                                        widget.data.three.toUpperCase(),
+                                        style: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w900,
+                                          color: Color(0xFF2D1810),
+                                          shadows: <Shadow>[
+                                            Shadow(
+                                              color: Colors.white54,
+                                              offset: Offset(1, 1),
+                                              blurRadius: 2,
+                                            ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                _buildScoringBadge(
+                                    '+3', const Color(0xFF4CAF50)),
+                              ],
                             ),
-
-                            const SizedBox(height: 20),
-
-                            // Bottom scoring badge
-                            _buildScoringBadge('+3', const Color(0xFF4CAF50)),
                           ],
                         ),
                       ),
