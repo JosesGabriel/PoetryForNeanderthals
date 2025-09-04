@@ -51,3 +51,17 @@ class FetchScoredWordsSuccess extends HomeState {
   final List<Prompt> one;
   final List<Prompt> minusOne;
 }
+
+class NewGameLoading extends HomeState {}
+
+class NewGameSuccess extends HomeState {}
+
+class NewGameFailed extends HomeState {
+  NewGameFailed({
+    required this.errorCode,
+    required this.message,
+  });
+
+  final String errorCode;
+  final String message;
+}

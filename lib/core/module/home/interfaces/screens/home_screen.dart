@@ -155,7 +155,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           child: BlocBuilder<HomeCubit, HomeState>(
                             buildWhen:
                                 (HomeState previous, HomeState current) =>
-                                    current is UpdatePointsSuccess,
+                                    current is UpdatePointsSuccess ||
+                                    current is NewGameSuccess,
                             builder: (BuildContext context, HomeState state) {
                               return AnimatedBuilder(
                                 animation: _bounceAnimation,
@@ -204,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     shadowColor: Colors.black54,
                   ),
                   onPressed: () {
-                    context.read<HomeCubit>().fetchPrompt();
+                    context.read<HomeCubit>().newGame();
                   },
                   label: const Text(
                     'New Game',

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flirt/core/domain/models/api_error_response.dart';
 import 'package:flirt/core/module/home/application/service/cubit/home_dto.dart';
 import 'package:flirt/internal/prompts.dart';
@@ -14,6 +16,39 @@ class HomeCubit extends Cubit<HomeState> {
   List<Prompt> plusThrees = <Prompt>[];
   List<Prompt> plusOnes = <Prompt>[];
   List<Prompt> minusOnes = <Prompt>[];
+
+  Future<void> newGame() async {
+    try {
+      emit(NewGameLoading());
+
+      roundPoints = 0;
+
+      plusOnes.clear();
+      plusThrees.clear();
+      minusOnes.clear();
+
+      fetchPrompt();
+      fetchScoredWords();
+
+      emit(NewGameSuccess());
+    } on APIErrorResponse catch (error) {
+      emit(
+        NewGameFailed(
+          errorCode: error.errorCode!,
+          message: error.message,
+        ),
+      );
+    } catch (e, stackTrace) {
+      logError(e, stackTrace);
+
+      emit(
+        NewGameFailed(
+          errorCode: '$e',
+          message: 'Something went wrong.',
+        ),
+      );
+    }
+  }
 
   Future<void> updatePoints({
     required int score,
@@ -60,13 +95,24 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       emit(FetchPromptLoading());
 
-      final Prompt data = promptList.firstWhere(
-        (Prompt prompt) =>
-            !plusThrees.contains(prompt) &&
-            !plusOnes.contains(prompt) &&
-            !minusOnes.contains(prompt),
-        orElse: () => throw Exception('No available prompts left'),
-      );
+      // Filter prompts based on your conditions
+      final List<Prompt> availablePrompts = promptList
+          .where(
+            (Prompt prompt) =>
+                !plusThrees.contains(prompt) &&
+                !plusOnes.contains(prompt) &&
+                !minusOnes.contains(prompt),
+          )
+          .toList();
+
+      if (availablePrompts.isEmpty) {
+        throw Exception('No available prompts left');
+      }
+
+      // Pick a random prompt from the filtered list
+      final Random random = Random();
+      final Prompt data =
+          availablePrompts[random.nextInt(availablePrompts.length)];
 
       emit(FetchPromptSuccess(data));
     } on APIErrorResponse catch (error) {
